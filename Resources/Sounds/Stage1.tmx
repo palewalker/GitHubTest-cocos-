@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="47">
+ <tileset firstgid="1" name="132" tilewidth="16" tileheight="16" tilecount="8" columns="8">
+  <image source="tile.png" width="128" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="Attrib" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Attrib" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Attrib" value="2"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Attrib" value="2"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Attrib" value="2"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="Attrib" value="2"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="Attrib" value=""/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="Attrib" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="9" name="132" tilewidth="16" tileheight="16" tilecount="8" columns="8">
+  <image source="tile.png" width="128" height="16"/>
+ </tileset>
+ <objectgroup name="Map_Object"/>
+ <objectgroup name="Jump">
+  <object id="12" name="jump0" x="201" y="359"/>
+  <object id="14" name="jump1" x="274" y="296"/>
+  <object id="15" name="jump2" x="271" y="239"/>
+  <object id="17" name="jump3" x="184" y="208"/>
+  <object id="22" name="jump4" x="50" y="98"/>
+  <object id="23" name="jump5" x="87" y="63"/>
+  <object id="27" name="jump6" x="276" y="145"/>
+  <object id="29" name="jump7" x="374" y="91"/>
+  <object id="33" name="jump8" x="580" y="318"/>
+  <object id="34" name="jump9" x="610" y="292"/>
+  <object id="37" name="jump10" x="624" y="197"/>
+  <object id="39" name="jump11" x="685" y="128"/>
+  <object id="40" name="jump12" x="637" y="83"/>
+  <object id="41" name="jump13" x="654" y="54"/>
+  <object id="45" name="jump14" x="625" y="233"/>
+ </objectgroup>
+ <objectgroup name="Float">
+  <object id="13" name="float0" x="244" y="340"/>
+  <object id="16" name="float1" x="225" y="221"/>
+  <object id="21" name="float2" x="77" y="171"/>
+  <object id="26" name="float3" x="235" y="125"/>
+  <object id="28" name="float4" x="327" y="123"/>
+  <object id="31" name="float5" x="510" y="364"/>
+  <object id="32" name="float6" x="558" y="361"/>
+  <object id="36" name="float7" x="626" y="267"/>
+  <object id="38" name="float8" x="691" y="169"/>
+ </objectgroup>
+ <objectgroup name="SavePoint">
+  <object id="11" name="Save0" x="34" y="373"/>
+  <object id="24" name="Save1" x="167" y="38"/>
+  <object id="35" name="Save3" x="647" y="308"/>
+  <object id="30" name="Save2" x="436" y="94"/>
+  <object id="42" name="jump14" x="174" y="381"/>
+ </objectgroup>
+ <layer name="TileLayer" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztmOsKwzAIhVO69f0feSusIMEYPWqQdgf8U1KTL95oW8P1+tpGzOuDamt+38gZojkOYtnK5FiplRz9XkjeXT44eeOfzbH/7FJW3LPzCo2dVRXqI0KUY+/MopV9mtMs7097K/yszp1+j7tzWPtgJQ5PD0diaJWWw7N3dQ4u77h1ETWm0WhOaOLRsyAcSC+fnWX0XLqz2boZR1T9P4lD+34mx2gOWM+r8Z8dj4Mx7hyIqufVSH1vmXFwdyjdKyrLvOO+26LmpVcIB11/F45Tq/6fSIrgkKSpcXSe07quwEF9addL86MCB6o/x7M4PopIA/c=
+  </data>
+ </layer>
+ <objectgroup name="SpawnPos">
+  <object id="1" name="Hero_Spawn" x="70" y="368" width="22" height="27"/>
+ </objectgroup>
+ <objectgroup name="Map_Replace">
+  <object id="5" name="NextStage" x="772" y="-3" width="27" height="53"/>
+ </objectgroup>
+</map>
