@@ -2,7 +2,8 @@
 #include "SimpleAudioEngine.h"
 #include "Stage2.h"
 
-
+#include "CRyuPathFinder.hpp"
+#include "Stage3.h"
 
 USING_NS_CC;
 
@@ -51,6 +52,7 @@ bool Stage2::init()
 	
 	this->scheduleUpdate();
 	this->schedule(schedule_selector(Stage2::ObjectReset), 2.0f);
+	this->schedule(schedule_selector(Stage2::PacManAstar), 2.0f);
 
 
 	
@@ -80,6 +82,12 @@ void Stage2::update(float dt)
 	//인터페이스 deadcount 업데이트
 
 	CInterFace::GetInstance()->Update(dt);
+
+	//팩맨 STATE 체크(상태별 애니메이션 변경), A* 이동
+	mpPacMan->Show();
+	mpPacMan->UpdateMove(dt);
+
+	ReplaceNextStage();
 
 	
 }
@@ -121,6 +129,13 @@ void Stage2::StageInit()
 	mpPlayer->Create(mMap);
 	mpPlayer->SaveInit();
 
+	mpPacMan = new CPacMan();
+	mpPacMan->Create();
+	mpPacMan->SetScene(this);
+	mpPacMan->Build();
+	mpPacMan->SetPosition(mMap->PacManSpawn());
+	mpPacMan->RunAni();
+
 	joypad = new JoyStick();
 	joypad->create(mpLayerForJoyPad, Vec2(80, 240));
 	
@@ -130,6 +145,12 @@ void Stage2::StageInit()
 	CInterFace::GetInstance()->SetScene(this);
 	CInterFace::GetInstance()->SetInterFace();
 
+	//A*
+	//mpPathFinder = new CPathFinder();
+	mpPathFinder = new CRyuPathFinder();
+	mpPathFinder->Create();
+
+	
 
 
 	//게임 구성에 필요한 객체 생성
@@ -180,6 +201,8 @@ void Stage2::onTouchesBegan(const vector<Touch*>&touches, Event *unused_event)
 					mpPlayer->LoadPos();
 
 					mpGameOver->Hide();
+
+					resume();
 				}
 			}
 
@@ -208,9 +231,80 @@ void Stage2::onTouchesMoved(const vector<Touch*>&touches, Event *unused_event)
 void Stage2::onTouchesEnded(const vector<Touch*>&touches, Event *unused_event)
 {
 	joypad->TouchesEnded(touches, unused_event);
+
+
 	
 }
 void Stage2::onTouchesCancelled(const vector<Touch*>&touches, Event *unused_event)
 {
 	joypad->TouchesCancelled(touches, unused_event);
 }
+
+void Stage2::PacManAstar(float dt)
+{
+	if (ALIVE == mpPlayer->GetState())
+	{
+		int tRow = 0;
+		int tCol = 0;
+
+		int iRow = 0;
+		int iCol = 0;
+
+		tRow = (480 - mpPlayer->GetPosition().y - 16) / 16;
+		tCol = (mpPlayer->GetPosition().x) / 16;
+
+		iRow = (480 - mpPacMan->GetPosition().y) / 16;
+		iCol = (mpPacMan->GetPosition().x) / 16;
+
+		Vec2 tVecBegin = Vec2::ZERO;
+		tVecBegin.x = iCol;//mpPacMan->GetCol();
+		tVecBegin.y = iRow; //mpPacMan->GetRow();
+
+		Vec2 tVecEnd = Vec2::ZERO;
+		tVecEnd.x = tCol;
+		tVecEnd.y = tRow;
+
+		mpPacMan->StopMove();
+
+		mpPathFinder->InputClickData(tVecBegin, tVecEnd);
+		mpPathFinder->FindPath(mMap);
+
+		mpPathFinder->SetRoadData();
+
+
+
+
+		int ti = 0;
+
+		for (ti = 0; ti < mpPathFinder->m_RoadVec.size(); ti++)
+		{
+			Vec2 tVec = mpPathFinder->m_RoadVec[mpPathFinder->m_RoadVec.size() - 1 - ti];
+
+			mpPacMan->m_RoadVec.push_back(tVec);
+		}
+
+		mpPacMan->BeginMove();
+	}
+}
+
+void Stage2::ReplaceNextStage()
+{
+	if (true == mMap->NextStage(mpPlayer->GetPosition()))
+	{
+		//bug_stageskip
+		auto tpScene = Stage3::createScene();
+		Director::getInstance()->pushScene(tpScene);
+	}
+}
+
+void Stage2::PacManReset()
+{
+	if (true == mpGameOver->IsShow())
+	{
+		pause();
+
+		mpPacMan->SetPosition(mMap->PacManSpawn());
+
+	}
+}
+

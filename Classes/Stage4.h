@@ -5,15 +5,18 @@
 #include "Map.h"
 #include "CGameOver.h"
 #include "CInterFace.h"
-#include"CPacMan.h"
-#include "CPathFinder.h"
-
-class CRyuPathFinder;
-class JoyStick;
-
+//#include "Stage2.h"
 USING_NS_CC;
+
+class JoyStick;
 class AnimationBox;
-class Stage2 : public cocos2d::Scene
+class LightEffect;
+class EffectSprite;
+
+
+
+
+class Stage4 : public cocos2d::Scene
 {
 
 protected:
@@ -22,19 +25,20 @@ protected:
 	Size winSize;
 	CMap *mMap = NULL;
 	CPlayer *mpPlayer = NULL;
-
-
-	
-	/*EventListenerKeyboard *mpKeyListener = NULL;  Test*/
+	/*EventListenerKeyboard *mpKeyListener = NULL;*/
 	EventListenerTouchAllAtOnce *mpListener = NULL;
 	JoyStick *joypad = NULL;
 	CGameOver* mpGameOver = NULL;
 
-	//A*
-	CPacMan *mpPacMan = NULL;
-	//CPathFinder *mpPathFinder = NULL;
-	CRyuPathFinder *mpPathFinder = NULL;
+	RenderTexture* mpRender = NULL;
+	Texture2D* BGTexture = NULL;
 
+	
+	Vec3 _lightPos;
+	LightEffect* _effect;
+	Sprite* _lightSprite = NULL;
+	
+	float _scale, _screenW, _screenH;
 	
 
 public:
@@ -53,17 +57,17 @@ public:
 	virtual void onTouchesMoved(const vector<Touch*>&touches, Event *unused_event);
 	virtual void onTouchesEnded(const vector<Touch*>&touches, Event *unused_event);
 	virtual void onTouchesCancelled(const vector<Touch*>&touches, Event *unused_event);
-
+	
 
 	void StageInit();
 	void ObjectReset(float dt);
 
-	void PacManAstar(float dt);
-	void PacManReset();
 	
-
 	void ReplaceNextStage();
-	
+
+	EffectSprite* addBackGroundTile();
+	void ShaderInit(); 
+	void UpdateRender();
 
 
 public:
@@ -76,7 +80,7 @@ public:
 	virtual bool init();
 
 
-	CREATE_FUNC(Stage2);
+	CREATE_FUNC(Stage4);
 
 	
 };

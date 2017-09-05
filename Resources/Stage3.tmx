@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="67">
+ <tileset firstgid="1" source="untitled3.tsx"/>
+ <tileset firstgid="9" source="untitled2.tsx"/>
+ <layer name="TileLayer" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlkEKwCAMwBS3/f/JO6ggww2rVjtIICcVGvBQ75zziIiIiIho2hYkdy1DRyTMGmSQ3o5j4K0GV1KKtY5e6JhLSDOclbM84xdWOvIMtY4WdnaEQklHfvNkVcesXeDtTKNDc6dZ1VH+k792aDTs6NBosNZxA3cBA+Q=
+  </data>
+ </layer>
+ <objectgroup name="Map_Replace">
+  <object id="56" name="NextStage" x="754.333" y="358.333" width="43" height="39"/>
+ </objectgroup>
+ <objectgroup name="Float">
+  <object id="44" name="float0" x="93" y="366"/>
+  <object id="46" name="float1" x="261.333" y="425.667"/>
+  <object id="48" name="float2" x="283" y="371.667"/>
+  <object id="49" name="float3" x="350.333" y="327.667"/>
+  <object id="53" name="float4" x="446.5" y="298.333"/>
+  <object id="59" name="float5" x="477.5" y="329"/>
+  <object id="60" name="float6" x="498.5" y="368.5"/>
+ </objectgroup>
+ <objectgroup name="Jump">
+  <object id="43" name="jump0" x="115.833" y="338.167"/>
+  <object id="47" name="jump1" x="211.333" y="366"/>
+  <object id="50" name="jump2" x="341.5" y="363.333"/>
+  <object id="57" name="jump3" x="354.5" y="299"/>
+  <object id="58" name="jump4" x="367.5" y="268"/>
+  <object id="61" name="jump5" x="528.5" y="441.5"/>
+  <object id="62" name="jump6" x="573" y="441"/>
+  <object id="63" name="jump7" x="622.5" y="439.5"/>
+  <object id="64" name="jump8" x="660" y="423"/>
+ </objectgroup>
+ <objectgroup name="SavePoint">
+  <object id="45" name="Save0" x="183.667" y="362.333"/>
+  <object id="65" name="Save1" x="409.5" y="249"/>
+ </objectgroup>
+ <objectgroup name="SpawnPos">
+  <object id="40" name="Hero_Spawn" x="729.667" y="367.667" width="21.3333" height="26"/>
+  <object id="42" name="PacMan_Spawn" x="589.333" y="151.334"/>
+ </objectgroup>
+</map>

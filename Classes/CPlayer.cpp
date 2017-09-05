@@ -61,6 +61,8 @@ void CPlayer::Show()
 
 void CPlayer::SetPosition(Vec2 tVec)
 {
+	mVec = tVec;
+
 	mpSprite->setPosition(tVec);
 	
 }
@@ -397,6 +399,8 @@ void CPlayer::Jump(CMap *tpMap)
 	if (mState == ALIVE)
 	{
 		float tGravity = 0.7f;
+		//float tGravity = 0;
+		
 
 		if (mJumpPower < 0)
 		{

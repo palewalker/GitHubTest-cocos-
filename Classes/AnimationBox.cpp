@@ -17,7 +17,7 @@ AnimationBox::~AnimationBox()
 void AnimationBox::Create(string tAniName, int tTotalFrameCount, float tDelayTime)
 {
 
-
+	
 	mAniName = tAniName + ".png";
 	mTotalFrameCount = tTotalFrameCount;
 	mDelayTime = tDelayTime;
@@ -29,23 +29,25 @@ void AnimationBox::Create(string tAniName, int tTotalFrameCount, float tDelayTim
 	
 	auto tTexture = tSpriteSrc->getTexture();
 
-	tWidth = ((tSpriteSrc->getContentSize().width) * 256) / 1024;
-	tHeight = ((tSpriteSrc->getContentSize().height) * 256) / 1024;
+	tWidth = ((tSpriteSrc->getContentSize().width) * 45) / 135;
+	tHeight = ((tSpriteSrc->getContentSize().height) * 45) / 45;
 
 	auto tAnimation = Animation::create();
 	tAnimation->setDelayPerUnit(tDelayTime);
 
 	for (int ti = 0; ti < mTotalFrameCount; ti++)
 	{
-	tRow = ti / 4;
-	tCol = ti % 4;
+	tRow = 0;
+	tCol = ti % 3;
 	tAnimation->addSpriteFrameWithTexture(tTexture, Rect(tCol*tWidth, tRow*tHeight, tWidth, tHeight));
 	}
 	tSpriteC = Sprite::create(mAniName, Rect(0, 0, tWidth, tHeight));
+	tSpriteC->setScale(0.8f);
 	tSpriteC->retain();
 
 	auto tAnimate = Animate::create(tAnimation);
-	tRepeatForeverC = Repeat::create(tAnimate,1);
+	tRepeatForeverC = RepeatForever::create(tAnimate);
+	
 	tRepeatForeverC->retain();
 	
 
@@ -94,6 +96,11 @@ void AnimationBox::SetScene(Node *tpNode)
 void AnimationBox::SetPosition(Vec2 tVec)
 {
 	tSpriteC->setPosition(tVec);
+}
+
+Vec2 AnimationBox::GetPosition()
+{
+	return tSpriteC->getPosition();
 }
 
 void AnimationBox::RunAni()

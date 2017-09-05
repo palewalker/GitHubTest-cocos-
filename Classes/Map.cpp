@@ -15,6 +15,7 @@ CMap::~CMap()
 
 void CMap::Create(Layer *tpLayer, int StageNum)
 {
+	
 	char tszTemp[512];
 	memset(tszTemp, 0, 512);
 	sprintf(tszTemp, "Stage%d.tmx", StageNum);
@@ -37,7 +38,7 @@ void CMap::Create(Layer *tpLayer, int StageNum)
 	NextStage(tVec);
 
 	//맵에서의 오브젝트 생성
-
+	
 	TMXObjectGroup *tSaveObject = tMap->getObjectGroup("SavePoint");
 	SaveNum = tSaveObject->getObjects().size();
 	tpSavepoint = new CSavePoint*[SaveNum];
@@ -82,10 +83,12 @@ int CMap::GetAttribute(int tRow, int tCol)
 	int tGID = tMap->getLayer("TileLayer")->
 		getTileGIDAt(Vec2(tCol, tRow));
 	Value tValue = tMap->getPropertiesForGID(tGID);
+	
 
 	if (false == tValue.isNull())
 	{
 		tResult = tValue.asValueMap()["Attrib"].asInt();
+	
 
 	}
 
@@ -97,6 +100,8 @@ Vec2 CMap::HeroSpawn()
 
 
 	ValueMap tSpawnPositionActor = tObj->getObject("Hero_Spawn");
+	
+
 
 	int tX = tSpawnPositionActor["x"].asInt();
 	int tY = tSpawnPositionActor["y"].asInt();
@@ -109,12 +114,34 @@ Vec2 CMap::HeroSpawn()
 	return tVec;
 
 }
+
+Vec2 CMap::PacManSpawn()
+{
+	TMXObjectGroup *tObj = tMap->getObjectGroup("SpawnPos");
+
+
+	ValueMap tSpawnPositionActor = tObj->getObject("PacMan_Spawn");
+
+	int tX = tSpawnPositionActor["x"].asInt();
+	int tY = tSpawnPositionActor["y"].asInt();
+
+
+	Vec2 tVec;
+	tVec.x = tX;
+	tVec.y = tY;
+
+	return tVec;
+}
 bool CMap::NextStage(Vec2 tVec)
 {
+	bool tResult = false;
+
 	TMXObjectGroup *tObj = tMap->getObjectGroup("Map_Replace");
 
 
 	ValueMap tSpawnPositionActor = tObj->getObject("NextStage");
+
+	
 
 	int tX = tSpawnPositionActor["x"].asInt();
 	int tY = tSpawnPositionActor["y"].asInt();
@@ -123,13 +150,17 @@ bool CMap::NextStage(Vec2 tVec)
 	float tWidth = tSpawnPositionActor["width"].asFloat();
 	float tHeight = tSpawnPositionActor["height"].asFloat();
 
+
+	//bug_stageskip
+
 	if (((tX + tWidth / 2 >= tVec.x )&& (tVec.x >= tX - tWidth / 2)) &&
 		((tY + tHeight / 2 >= tVec.y )&& (tVec.y >= tY - tHeight / 2)))
 	{
-		return true;
+		//return true;
+		tResult = true;
 	}
 
-
+	return tResult;
 }
 
 TMXTiledMap* CMap::GetTMX()
@@ -156,6 +187,7 @@ int CMap::CheckAttribute(Vec2 tVec)
 	tRow = tVec.y;
 
 	int tAttribute = GetAttribute(tRow, tCol);
+	
 
 	return tAttribute;
 

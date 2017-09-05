@@ -50,7 +50,7 @@ protected:
 	int mDirState = RIGHT;
 	bool IsSave = false;
 
-	enum{LEFT, RIGHT};
+	
 
 
 	
@@ -67,7 +67,7 @@ public:
 	CPlayer();
 	virtual ~CPlayer();
 
-	enum{JUMPSTATE_DEF, JUMPSTATE_UP, JUMPSTATE_DOWN};
+	
 
 
 	virtual void Create(CMap *tpMap);

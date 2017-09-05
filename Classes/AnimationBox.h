@@ -22,6 +22,8 @@ class AnimationBox
 protected:
 	Node *mpNode = NULL;
 
+	
+
 
 	string mAniName = "";
 
@@ -30,7 +32,7 @@ protected:
 
 	//코코스객체
 	Sprite *tSpriteC = NULL;
-	Repeat *tRepeatForeverC = NULL;
+	RepeatForever *tRepeatForeverC = NULL;
 
 
 
@@ -49,9 +51,11 @@ public:
 
 
 	void SetScene(Node *tpNode);
+	
 
 
 	void SetPosition(Vec2 tVec);
+	Vec2 GetPosition();
 
 	void RunAni();
 	void StopAni();

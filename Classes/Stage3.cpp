@@ -1,19 +1,19 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#include "Stage1.h"
+#include "Stage3.h"
 
 
 
 USING_NS_CC;
 
 
-Scene* Stage1::createScene()
+Scene* Stage3::createScene()
 {
-	return Stage1::create();
+	return Stage3::create();
 }
 
 // on "init" you need to initialize your instance
-bool Stage1::init()
+bool Stage3::init()
 {
 	//////////////////////////////
 	// 1. super init first
@@ -38,10 +38,15 @@ bool Stage1::init()
 
 	//게임에 필요한 레이어 생성(게임 월드, 조이패드, 인터페이스)
 	mpLayerForWorld = Layer::create();
-	this->addChild(mpLayerForWorld);
+	this->addChild(mpLayerForWorld, 99);
+
+	mpBlock = Sprite::create("Block.png");
+	mpBlock->setPosition(Vec2(400, 240));
+	this->addChild(mpBlock, 100);
+	
 
 	mpLayerForJoyPad = Layer::create();
-	this->addChild(mpLayerForJoyPad, 100);
+	this->addChild(mpLayerForJoyPad, 101);
 
 	
 
@@ -50,14 +55,14 @@ bool Stage1::init()
 	winSize = Director::getInstance()->getWinSize();
 	
 	this->scheduleUpdate();
-	this->schedule(schedule_selector(Stage1::ObjectReset), 2.0f);
+	this->schedule(schedule_selector(Stage3::ObjectReset), 2.0f);
 
 
 	
 	return true;
 }
 
-void Stage1::update(float dt)
+void Stage3::update(float dt)
 {
 	//플레이어 관련 함수
 	mpPlayer->Jump(mMap);
@@ -84,11 +89,12 @@ void Stage1::update(float dt)
 	//bug_stageskip
 	ReplaceNextStage();
 	//플레이어의 위치 체크해서 true일시 다음 맵으로 신 전환
+	UpdateRender();
 
 	
 }
 
-void Stage1::onEnter()
+void Stage3::onEnter()
 {
 	Scene::onEnter();
 
@@ -96,32 +102,32 @@ void Stage1::onEnter()
 
 	
 
-	mpListener->onTouchesBegan = CC_CALLBACK_2(Stage1::onTouchesBegan, this);
-	mpListener->onTouchesMoved = CC_CALLBACK_2(Stage1::onTouchesMoved, this);
-	mpListener->onTouchesEnded = CC_CALLBACK_2(Stage1::onTouchesEnded, this);
-	mpListener->onTouchesCancelled = CC_CALLBACK_2(Stage1::onTouchesCancelled, this);
+	mpListener->onTouchesBegan = CC_CALLBACK_2(Stage3::onTouchesBegan, this);
+	mpListener->onTouchesMoved = CC_CALLBACK_2(Stage3::onTouchesMoved, this);
+	mpListener->onTouchesEnded = CC_CALLBACK_2(Stage3::onTouchesEnded, this);
+	mpListener->onTouchesCancelled = CC_CALLBACK_2(Stage3::onTouchesCancelled, this);
 
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mpListener, this);
 
 	//mpKeyListener = EventListenerKeyboard::create();
-	//mpKeyListener->onKeyPressed = CC_CALLBACK_2(Stage1::onKeyPressed, this);
-	//mpKeyListener->onKeyReleased = CC_CALLBACK_2(Stage1::onKeyReleased, this);
+	//mpKeyListener->onKeyPressed = CC_CALLBACK_2(Stage3::onKeyPressed, this);
+	//mpKeyListener->onKeyReleased = CC_CALLBACK_2(Stage3::onKeyReleased, this);
 	//_eventDispatcher->addEventListenerWithSceneGraphPriority(mpKeyListener, this);
 }
 
-void Stage1::onExit()
+void Stage3::onExit()
 {
 	Scene::onExit();
 }
 
-void Stage1::StageInit()
+void Stage3::StageInit()
 {
 	mMap = new CMap();
-	mMap->Create(mpLayerForWorld, 1);
+	mMap->Create(mpLayerForWorld, 3);
 
 	mpPlayer = new CPlayer();
-	mpPlayer->SetScene(this);
+	mpPlayer->SetScene(mpLayerForWorld);
 	mpPlayer->Create(mMap);
 	mpPlayer->SaveInit();
 
@@ -135,24 +141,44 @@ void Stage1::StageInit()
 	CInterFace::GetInstance()->SetInterFace();
 
 
+	//렌더 텍스쳐를 통해 화면 회전 효과 구현
+	Size tWinSize = Director::getInstance()->getWinSize();
+	mpRender = RenderTexture::create(800, 480, Texture2D::PixelFormat::RGBA8888);
+	mpRender->retain();
+	mpRender->setPosition(Vec2(400, 240));
+	mpRender->setScaleX(0.7f);
+
+	auto RotateRender = RotateBy::create(15.0f, 360.0f);
+	auto RepeatRender = RepeatForever::create(RotateRender);
+	mpRender->runAction(RepeatRender);
+	
+
+	this->addChild(mpRender,100);
+
+
+
+
+
+
+
 
 	//게임 구성에 필요한 객체 생성
 
 
 }
 
-//void Stage1::onKeyPressed(EventKeyboard::KeyCode keyCode,
+//void Stage3::onKeyPressed(EventKeyboard::KeyCode keyCode,
 //	Event *event)
 //{
 //	mpPlayer->KeyPressed(keyCode, event);
 //}
-//void Stage1::onKeyReleased(EventKeyboard::KeyCode keyCode,
+//void Stage3::onKeyReleased(EventKeyboard::KeyCode keyCode,
 //	Event *event)
 //{
 //	mpPlayer->KeyReleased(keyCode, event);
 //}
 
-void Stage1::ObjectReset(float dt)
+void Stage3::ObjectReset(float dt)
 {
 	for (int i = 0; i < mMap->GetJumpPointNum(); i++)
 	{
@@ -162,7 +188,7 @@ void Stage1::ObjectReset(float dt)
 	//more jump 재생성
 }
 
-void Stage1::onTouchesBegan(const vector<Touch*>&touches, Event *unused_event)
+void Stage3::onTouchesBegan(const vector<Touch*>&touches, Event *unused_event)
 {
 	joypad->TouchesBegan(touches, unused_event);
 
@@ -205,27 +231,37 @@ void Stage1::onTouchesBegan(const vector<Touch*>&touches, Event *unused_event)
 
 
 }
-void Stage1::onTouchesMoved(const vector<Touch*>&touches, Event *unused_event)
+void Stage3::onTouchesMoved(const vector<Touch*>&touches, Event *unused_event)
 {
 	joypad->TouchesMoved(touches, unused_event);
 }
-void Stage1::onTouchesEnded(const vector<Touch*>&touches, Event *unused_event)
+void Stage3::onTouchesEnded(const vector<Touch*>&touches, Event *unused_event)
 {
 	joypad->TouchesEnded(touches, unused_event);
 	
 }
-void Stage1::onTouchesCancelled(const vector<Touch*>&touches, Event *unused_event)
+void Stage3::onTouchesCancelled(const vector<Touch*>&touches, Event *unused_event)
 {
 	joypad->TouchesCancelled(touches, unused_event);
 }
 
 
-void Stage1::ReplaceNextStage()
+void Stage3::ReplaceNextStage()
 {
 	if (true == mMap->NextStage(mpPlayer->GetPosition()))
 	{
 		//bug_stageskip
-		auto tpScene = Stage2::createScene();
+		auto tpScene = Stage4::createScene();
 		Director::getInstance()->pushScene(tpScene);
 	}
+}
+
+void Stage3::UpdateRender()
+{
+	mpRender->begin();
+	mpLayerForWorld->visit();
+	mpRender->end();
+
+	//렌더 텍스쳐를 업데이트 함수에 넣어서 신과 동기화
+
 }

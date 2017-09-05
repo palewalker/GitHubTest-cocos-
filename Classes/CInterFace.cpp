@@ -38,7 +38,7 @@ void CInterFace::SetScene(Node *tpNode)
 void CInterFace::SetInterFace()
 {
 	InterFaceLayer = Layer::create();
-	mpNode->addChild(InterFaceLayer, 100);//인터페이스용 레이어
+	mpNode->addChild(InterFaceLayer, 103);//인터페이스용 레이어
 
 	winSize = Director::getInstance()->getWinSize();
 

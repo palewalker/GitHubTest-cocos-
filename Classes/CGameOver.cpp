@@ -41,7 +41,6 @@ void CGameOver::SetVisible(bool isPlayerState)
 		if (true == mBackLayer->isVisible())
 		{
 			mBackLayer->setVisible(false);
-			mState = DEAD;
 		}
 	}
 	else
@@ -51,9 +50,6 @@ void CGameOver::SetVisible(bool isPlayerState)
 
 		{
 			mBackLayer->setVisible(true);
-			mState = ALIVE;
-		
-			CInterFace::GetInstance()->DeadCountUP();
 			
 		}
 	}

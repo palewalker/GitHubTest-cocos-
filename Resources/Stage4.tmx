@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="85">
+ <tileset firstgid="1" source="untitled3.tsx"/>
+ <tileset firstgid="9" source="untitled2.tsx"/>
+ <layer name="TileLayer" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztmAEKgCAMAA2r/z85ggSRuc25yTQPBrVqemklhWDL8cXsrOxxZnkoPLKyx8uNRCL5RuM+cui5x+W4cdqpnd873qt5QHWofeo5osKLh1Y75fHe+pZsj/balvzJQ6u2JdsDr1PLca+/mO1i9WIWM3tI5oO2Ry/Y+rOVkc9HC2mucfHoIenP9rBje9h5SGpK3l9a7z0IT2MsIX2bMQ8P/yUoanNVez2QQ92XfP0D5SFGe0D/CLA+QflyG+pvLT+rxwPYmwH8
+  </data>
+ </layer>
+ <objectgroup name="Map_Replace">
+  <object id="56" name="NextStage" x="779.333" y="57.333" width="23" height="52"/>
+ </objectgroup>
+ <objectgroup name="Float">
+  <object id="44" name="float0" x="212" y="160"/>
+  <object id="46" name="float1" x="247.333" y="300.667"/>
+  <object id="48" name="float2" x="100" y="127.667"/>
+  <object id="49" name="float3" x="107.333" y="453.667"/>
+  <object id="53" name="float4" x="157" y="451.333"/>
+  <object id="59" name="float5" x="244" y="455"/>
+  <object id="60" name="float6" x="298" y="451"/>
+  <object id="67" name="float7" x="516" y="413"/>
+  <object id="70" name="float8" x="684" y="433"/>
+  <object id="72" name="float8" x="746" y="340"/>
+  <object id="73" name="float9" x="707" y="319"/>
+  <object id="74" name="float10" x="665" y="298"/>
+  <object id="75" name="float11" x="636" y="275.5"/>
+  <object id="80" name="float12" x="543.5" y="140.5"/>
+  <object id="82" name="float13" x="480" y="144"/>
+  <object id="83" name="float14" x="454.5" y="84.5"/>
+ </objectgroup>
+ <objectgroup name="Jump">
+  <object id="43" name="jump0" x="250.333" y="200.667"/>
+  <object id="47" name="jump1" x="336.333" y="205"/>
+  <object id="50" name="jump2" x="126" y="362.333"/>
+  <object id="61" name="jump3" x="191" y="425"/>
+  <object id="62" name="jump4" x="338" y="427"/>
+  <object id="66" name="jump5" x="464" y="430"/>
+  <object id="68" name="jump6" x="570" y="427"/>
+  <object id="77" name="jump7" x="611.5" y="204.5"/>
+  <object id="78" name="jump8" x="620" y="163.5"/>
+  <object id="79" name="jump9" x="615.5" y="123.5"/>
+  <object id="84" name="jump10" x="453.5" y="51"/>
+ </objectgroup>
+ <objectgroup name="SavePoint">
+  <object id="45" name="Save0" x="346.667" y="144.333"/>
+  <object id="57" name="Save1" x="16" y="390"/>
+  <object id="64" name="Save2" x="422" y="414"/>
+  <object id="71" name="Save3" x="732" y="355"/>
+  <object id="76" name="Save4" x="555" y="195.5"/>
+ </objectgroup>
+ <objectgroup name="SpawnPos">
+  <object id="40" name="Hero_Spawn" x="698.333" y="80" width="21.3333" height="26"/>
+  <object id="42" name="PacMan_Spawn" x="775.333" y="17.334"/>
+ </objectgroup>
+</map>

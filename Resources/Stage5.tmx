@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="16" tileheight="16" nextobjectid="57">
+ <tileset firstgid="1" source="untitled3.tsx"/>
+ <tileset firstgid="9" source="untitled2.tsx"/>
+ <layer name="TileLayer" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0jEKwEAIBVFb73/hJZAqbCUE/MM8sHfQKkmS/tHvpKN0pEu8AeV3KB1fxKYH4V5dmR1p+xIl/s0NpYPOO2mih7ONHbvYscsBtQYDPQ==
+  </data>
+ </layer>
+ <objectgroup name="Map_Replace">
+  <object id="56" name="NextStage" x="773.333" y="163.333"/>
+ </objectgroup>
+ <objectgroup name="Float">
+  <object id="44" name="float0" x="94" y="332"/>
+  <object id="46" name="float1" x="123.333" y="298.667"/>
+  <object id="48" name="float2" x="130" y="230.667"/>
+  <object id="49" name="float3" x="85.3333" y="208.667"/>
+  <object id="53" name="float4" x="124" y="141.333"/>
+ </objectgroup>
+ <objectgroup name="Jump">
+  <object id="43" name="jump0" x="95.3333" y="364.667"/>
+  <object id="47" name="jump1" x="121.333" y="260"/>
+  <object id="50" name="jump2" x="94" y="167.333"/>
+ </objectgroup>
+ <objectgroup name="SavePoint">
+  <object id="45" name="Save0" x="198.667" y="359.333"/>
+ </objectgroup>
+ <objectgroup name="SpawnPos">
+  <object id="40" name="Hero_Spawn" x="38" y="364" width="21.3333" height="26"/>
+  <object id="42" name="PacMan_Spawn" x="589.333" y="151.334"/>
+ </objectgroup>
+</map>

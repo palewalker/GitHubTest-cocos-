@@ -5,15 +5,14 @@
 #include "Map.h"
 #include "CGameOver.h"
 #include "CInterFace.h"
-#include"CPacMan.h"
-#include "CPathFinder.h"
+#include "Stage4.h"
 
-class CRyuPathFinder;
+
 class JoyStick;
 
 USING_NS_CC;
 class AnimationBox;
-class Stage2 : public cocos2d::Scene
+class Stage3 : public cocos2d::Scene
 {
 
 protected:
@@ -22,18 +21,17 @@ protected:
 	Size winSize;
 	CMap *mMap = NULL;
 	CPlayer *mpPlayer = NULL;
-
-
-	
-	/*EventListenerKeyboard *mpKeyListener = NULL;  Test*/
+	/*EventListenerKeyboard *mpKeyListener = NULL;*/
 	EventListenerTouchAllAtOnce *mpListener = NULL;
 	JoyStick *joypad = NULL;
 	CGameOver* mpGameOver = NULL;
+	RenderTexture* mpRender = NULL;
+	Sprite* mpBlock = NULL;
+	
 
-	//A*
-	CPacMan *mpPacMan = NULL;
-	//CPathFinder *mpPathFinder = NULL;
-	CRyuPathFinder *mpPathFinder = NULL;
+
+	
+	
 
 	
 
@@ -58,12 +56,11 @@ public:
 	void StageInit();
 	void ObjectReset(float dt);
 
-	void PacManAstar(float dt);
-	void PacManReset();
 	
-
 	void ReplaceNextStage();
-	
+
+	void UpdateRender();
+
 
 
 public:
@@ -76,7 +73,7 @@ public:
 	virtual bool init();
 
 
-	CREATE_FUNC(Stage2);
+	CREATE_FUNC(Stage3);
 
 	
 };

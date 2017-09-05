@@ -62,6 +62,7 @@ bool HelloWorld::init()
 
 void HelloWorld::doReplaceScene(Ref *pSender)
 {
+	//bug_stageskip
 	auto pScene = Stage1::create();
 	Director::getInstance()->replaceScene(pScene);
 }
