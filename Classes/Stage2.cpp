@@ -4,6 +4,7 @@
 
 #include "CRyuPathFinder.hpp"
 #include "Stage3.h"
+#include "SoundBox.h"
 
 USING_NS_CC;
 
@@ -88,6 +89,8 @@ void Stage2::update(float dt)
 	mpPacMan->UpdateMove(dt);
 
 	ReplaceNextStage();
+	mpPacMan->CollisionWithPlayer(mpPlayer);
+	PacManReset();
 
 	
 }
@@ -134,6 +137,7 @@ void Stage2::StageInit()
 	mpPacMan->SetScene(this);
 	mpPacMan->Build();
 	mpPacMan->SetPosition(mMap->PacManSpawn());
+	mpPacMan->SetOrigin(mMap->PacManSpawn());
 	mpPacMan->RunAni();
 
 	joypad = new JoyStick();
@@ -149,6 +153,10 @@ void Stage2::StageInit()
 	//mpPathFinder = new CPathFinder();
 	mpPathFinder = new CRyuPathFinder();
 	mpPathFinder->Create();
+
+	SoundBox::GetInstance()->Create();
+	SoundBox::GetInstance()->PlayBGM(2, true);
+
 
 	
 
@@ -199,10 +207,11 @@ void Stage2::onTouchesBegan(const vector<Touch*>&touches, Event *unused_event)
 				if (true == mpGameOver->IsShow())
 				{
 					mpPlayer->LoadPos();
+				
 
-					mpGameOver->Hide();
+					mpGameOver->Hide(2);
+				
 
-					resume();
 				}
 			}
 
@@ -291,6 +300,7 @@ void Stage2::ReplaceNextStage()
 {
 	if (true == mMap->NextStage(mpPlayer->GetPosition()))
 	{
+		SoundBox::GetInstance()->Destroy();
 		//bug_stageskip
 		auto tpScene = Stage3::createScene();
 		Director::getInstance()->pushScene(tpScene);
@@ -301,8 +311,6 @@ void Stage2::PacManReset()
 {
 	if (true == mpGameOver->IsShow())
 	{
-		pause();
-
 		mpPacMan->SetPosition(mMap->PacManSpawn());
 
 	}

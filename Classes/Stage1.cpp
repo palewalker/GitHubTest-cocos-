@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "Stage1.h"
+#include "SoundBox.h"
 
 
 
@@ -133,6 +134,10 @@ void Stage1::StageInit()
 
 	CInterFace::GetInstance()->SetScene(this);
 	CInterFace::GetInstance()->SetInterFace();
+	
+	SoundBox::GetInstance()->Create();
+	SoundBox::GetInstance()->PlayBGM(1, true);
+
 
 
 
@@ -183,7 +188,7 @@ void Stage1::onTouchesBegan(const vector<Touch*>&touches, Event *unused_event)
 				{
 					mpPlayer->LoadPos();
 
-					mpGameOver->Hide();
+					mpGameOver->Hide(1);
 				}
 			}
 
@@ -224,6 +229,7 @@ void Stage1::ReplaceNextStage()
 {
 	if (true == mMap->NextStage(mpPlayer->GetPosition()))
 	{
+		SoundBox::GetInstance()->Destroy();
 		//bug_stageskip
 		auto tpScene = Stage2::createScene();
 		Director::getInstance()->pushScene(tpScene);

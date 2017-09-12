@@ -17,8 +17,8 @@ private:
 	SoundBox();
 	~SoundBox();
 
-	string mStringBGMArray[4] = { "" };
-	string mStringEffectArray[2] = { "" };
+	string mStringBGMArray[7] = { "" };
+	string mStringEffectArray[3] = { "" };
 
 public:
 	static SoundBox *GetInstance();
@@ -31,6 +31,8 @@ public:
 
 	void PlayEffect(int tIndex);
 	void StopAllEffects();
+
+	void ResumeBGM();
 
 };
 

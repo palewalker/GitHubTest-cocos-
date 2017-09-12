@@ -33,22 +33,28 @@ bool HelloWorld::init()
 	
 
 
-	auto closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
-		CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+	MenuItemFont* closeItem = MenuItemFont::create
+	("END?", CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+	closeItem->setPosition(Vec2(600, 70));
 
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
-		origin.y + closeItem->getContentSize().height / 2));
 
+	
 	auto NextScene = MenuItemFont::create
-	("GameScene", CC_CALLBACK_1(HelloWorld::doReplaceScene, this));
-	NextScene->setPosition(Vec2(400, 240));
+	("GameStart!", CC_CALLBACK_1(HelloWorld::doReplaceScene, this));
+	NextScene->setPosition(Vec2(600, 130));
+	
 
 	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem, NextScene, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
+
+	auto tTitle = Sprite::create("Start.png");
+	tTitle->setPosition(Vec2(400, 240));
+	this->addChild(tTitle);
+
+	SoundBox::GetInstance()->Create();
+	SoundBox::GetInstance()->PlayBGM(0, true);
 
 	/*
 	auto mBackLayer = LayerColor::create(Color4B(0, 0, 255, 255), visibleSize.width, visibleSize.height);
@@ -63,6 +69,7 @@ bool HelloWorld::init()
 void HelloWorld::doReplaceScene(Ref *pSender)
 {
 	//bug_stageskip
+	SoundBox::GetInstance()->Destroy();
 	auto pScene = Stage1::create();
 	Director::getInstance()->replaceScene(pScene);
 }

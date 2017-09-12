@@ -1,7 +1,7 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "Stage3.h"
-
+#include "SoundBox.h"
 
 
 USING_NS_CC;
@@ -90,6 +90,7 @@ void Stage3::update(float dt)
 	ReplaceNextStage();
 	//플레이어의 위치 체크해서 true일시 다음 맵으로 신 전환
 	UpdateRender();
+	
 
 	
 }
@@ -157,7 +158,8 @@ void Stage3::StageInit()
 
 
 
-
+	SoundBox::GetInstance()->Create();
+	SoundBox::GetInstance()->PlayBGM(3, true);
 
 
 
@@ -209,7 +211,7 @@ void Stage3::onTouchesBegan(const vector<Touch*>&touches, Event *unused_event)
 				{
 					mpPlayer->LoadPos();
 
-					mpGameOver->Hide();
+					mpGameOver->Hide(3);
 				}
 			}
 
@@ -250,6 +252,7 @@ void Stage3::ReplaceNextStage()
 {
 	if (true == mMap->NextStage(mpPlayer->GetPosition()))
 	{
+		SoundBox::GetInstance()->Destroy();
 		//bug_stageskip
 		auto tpScene = Stage4::createScene();
 		Director::getInstance()->pushScene(tpScene);

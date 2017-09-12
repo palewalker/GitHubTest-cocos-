@@ -9,7 +9,8 @@
 
 using namespace cocos2d;
 using namespace std;
-
+class CBoss;
+class CProgress;
 class CPlayerBullet
 {
 protected:
@@ -34,6 +35,7 @@ public:
 	void FireMove();
 	void DirSet(int Dir);
 	bool CollisionWithSavePoint(CSavePoint *tSavePtr);
+	void CollisionWithBoss(CBoss *tBoss, CProgress *tProgress);
 
 
 

@@ -30,6 +30,7 @@ private:
 	Sprite *mShotSpr = NULL;
 
 	int mDeadCount = 0;
+	int mStageNum = 0;
 
 
 
@@ -46,6 +47,7 @@ public:
 	Sprite* GetJumpBtn();
 	Sprite* GetFireBtn();
 	void DeadCountUP();
+	void SetStageNum(int Stage);
 	
 
 

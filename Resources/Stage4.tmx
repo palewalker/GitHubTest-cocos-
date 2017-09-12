@@ -8,7 +8,7 @@
   </data>
  </layer>
  <objectgroup name="Map_Replace">
-  <object id="56" name="NextStage" x="779.333" y="57.333" width="23" height="52"/>
+  <object id="56" name="NextStage" x="786" y="57.333" width="16.3333" height="52"/>
  </objectgroup>
  <objectgroup name="Float">
   <object id="44" name="float0" x="212" y="160"/>

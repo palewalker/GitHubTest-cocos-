@@ -26,28 +26,32 @@ SoundBox *SoundBox::GetInstance()
 
 void SoundBox::Create()
 {
-	SimpleAudioEngine::getInstance()->setEffectsVolume(0.5);
-	SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5);
+	SimpleAudioEngine::getInstance()->setEffectsVolume(0.1);
+	SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.1);
 
-	mStringBGMArray[0] = "Sounds/tothemoon.mp3";
-	mStringBGMArray[1] = "Sounds/background.mp3";
-	mStringBGMArray[2] = "Sounds/Athletic.mp3";
-	mStringBGMArray[3] = "Sounds/start.mp3";
-	mStringEffectArray[0] = "Sounds/effect2.mp3";
-	mStringEffectArray[1] = "Sounds/flip.wav";
+	mStringBGMArray[0] = "Sounds/title.mp3";
+	mStringBGMArray[1] = "Sounds/Stage1.mp3";
+	mStringBGMArray[2] = "Sounds/Stage2.mp3";
+	mStringBGMArray[3] = "Sounds/Stage3.mp3";
+	mStringBGMArray[4] = "Sounds/Stage4.mp3";
+	mStringBGMArray[5] = "Sounds/Stage5.mp3";
+	mStringBGMArray[6] = "Sounds/Ending.mp3";
+	mStringEffectArray[0] = "Sounds/shoot.wav";
+	mStringEffectArray[1] = "Sounds/gameover.mp3";
+	mStringEffectArray[2] = "Sounds/Jump.wav";
 	
 
 	int ti = 0;
 	int tCount = 0;
 
-	tCount = 4;
+	tCount = 7;
 
 	for (ti = 0; ti < tCount; ti++)
 	{
 		SimpleAudioEngine::getInstance()->preloadBackgroundMusic(mStringBGMArray[ti].c_str());
 	}
 
-	tCount = 2;
+	tCount = 3;
 	for (ti = 0; ti < tCount; ti++)
 	{
 		SimpleAudioEngine::getInstance()->preloadEffect(mStringEffectArray[ti].c_str());
@@ -72,8 +76,10 @@ void SoundBox::PlayBGM(int tIndex, bool tIsLoop)
 
 void SoundBox::StopBGM()
 {
-	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+	SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
+
+
 
 void SoundBox::PlayEffect(int tIndex)
 {
@@ -82,4 +88,9 @@ void SoundBox::PlayEffect(int tIndex)
 void SoundBox::StopAllEffects()
 {
 	SimpleAudioEngine::getInstance()->stopAllEffects();
+}
+
+void SoundBox::ResumeBGM()
+{
+	SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

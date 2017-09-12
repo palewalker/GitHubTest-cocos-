@@ -94,6 +94,6 @@
   <object id="53" name="PacMan_Spawn" x="234" y="425"/>
  </objectgroup>
  <objectgroup name="Map_Replace">
-  <object id="5" name="NextStage" x="767" y="-6" width="34" height="53"/>
+  <object id="5" name="NextStage" x="788.333" y="-6" width="12.6667" height="53"/>
  </objectgroup>
 </map>

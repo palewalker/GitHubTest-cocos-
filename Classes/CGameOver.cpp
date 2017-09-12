@@ -1,5 +1,6 @@
 
 #include "CGameOver.h"
+#include "SoundBox.h"
 
 
 CGameOver::CGameOver()
@@ -29,32 +30,12 @@ void CGameOver::Create(Node* tpNode)
 		(winSize.height - mGameOverSpr->getContentSize().height) / 2 ));
 	mGameOverSpr->setAnchorPoint(Vec2(0, 0));
 	mBackLayer->addChild(mGameOverSpr);
-	
 
-	this->Hide();
+	
+	
+	this->Hide(6);
 }
 
-void CGameOver::SetVisible(bool isPlayerState)
-{
-	if (true == isPlayerState)
-	{
-		if (true == mBackLayer->isVisible())
-		{
-			mBackLayer->setVisible(false);
-		}
-	}
-	else
-	{
-		//ryu
-		if (false == mBackLayer->isVisible())
-
-		{
-			mBackLayer->setVisible(true);
-			
-		}
-	}
-	
-}
 
 Sprite* CGameOver::GetSprite()
 {
@@ -68,11 +49,24 @@ int CGameOver::GetState()
 
 void CGameOver::Show()
 {
+	
 	mBackLayer->setVisible(true);
+	CInterFace::GetInstance()->DeadCountUP();
+	
+	SoundBox::GetInstance()->StopBGM();
+	SoundBox::GetInstance()->PlayEffect(1);
+	
+	
 }
-void CGameOver::Hide()
+void CGameOver::Hide(int StageNum)
 {
 	mBackLayer->setVisible(false);
+	
+	SoundBox::GetInstance()->StopAllEffects();
+	if (StageNum < 6)
+	{
+		SoundBox::GetInstance()->ResumeBGM();
+	}
 }
 
 bool CGameOver::IsShow()

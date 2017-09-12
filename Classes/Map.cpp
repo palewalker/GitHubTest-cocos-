@@ -2,6 +2,7 @@
 #include "CSavePoint.h"
 #include "CPlatform.h"
 #include "CJumpPoint.h"
+#include "CInterFace.h"
 
 CMap::CMap()
 {
@@ -15,7 +16,9 @@ CMap::~CMap()
 
 void CMap::Create(Layer *tpLayer, int StageNum)
 {
-	
+	//인터페이스, 스테이지 넘버 받아오기
+	CInterFace::GetInstance()->SetStageNum(StageNum);
+
 	char tszTemp[512];
 	memset(tszTemp, 0, 512);
 	sprintf(tszTemp, "Stage%d.tmx", StageNum);
@@ -24,16 +27,18 @@ void CMap::Create(Layer *tpLayer, int StageNum)
 	tMap = TMXTiledMap::create(tString);
 	tMap->setAnchorPoint(Vec2(0.0f, 0.0f));
 
-	tpLayer->addChild(tMap, 1);
+	tpLayer->addChild(tMap, 3);
+	if (StageNum < 5)
+	{
+		memset(tszTemp, 0, 512);
+		sprintf(tszTemp, "BackGround%d.png", StageNum);
+		tString = tszTemp;
 
-	memset(tszTemp, 0, 512);
-	sprintf(tszTemp, "BackGround%d.png", StageNum);
-	tString = tszTemp;
+		mpBg = Sprite::create(tString);
+		mpBg->setAnchorPoint(Vec2(0.0f, 0.0f));
 
-	mpBg = Sprite::create(tString);
-	mpBg->setAnchorPoint(Vec2(0.0f, 0.0f));
-
-	tpLayer->addChild(mpBg, 0);
+		tpLayer->addChild(mpBg, 0);
+	}
 	Vec2 tVec;
 	NextStage(tVec);
 

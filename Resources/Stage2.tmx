@@ -55,10 +55,10 @@
   <object id="44" name="float16" x="396" y="144.667"/>
  </objectgroup>
  <objectgroup name="SpawnPos">
-  <object id="40" name="Hero_Spawn" x="726" y="60.6663" width="21.3333" height="26"/>
+  <object id="40" name="Hero_Spawn" x="728.667" y="67.9996" width="21.3333" height="26"/>
   <object id="42" name="PacMan_Spawn" x="504" y="257.333"/>
  </objectgroup>
  <objectgroup name="Map_Replace">
-  <object id="41" name="NextStage" x="764" y="46.6667" width="34" height="50"/>
+  <object id="41" name="NextStage" x="784.667" y="46.6667" width="13.3333" height="50"/>
  </objectgroup>
 </map>

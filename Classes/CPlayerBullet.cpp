@@ -1,5 +1,6 @@
 
 #include "CPlayerBullet.h"
+#include "CBoss.h"
 
 
 
@@ -89,4 +90,21 @@ bool CPlayerBullet::CollisionWithSavePoint(CSavePoint *tSavePtr)
 		return tf;
 	}
 	
+}
+
+void CPlayerBullet::CollisionWithBoss(CBoss *tBoss, CProgress *tProgress)
+{
+	float BulletRadius = mpSprite->getContentSize().width *0.5f;
+	
+
+	Rect tBossRect = tBoss->GetSprite()->getBoundingBox();
+	if (mState == ALIVE)
+	{
+
+		if (true == tBossRect.intersectsCircle(mpSprite->getPosition(), BulletRadius))
+		{
+			tBoss->AttackedByPlayer(tProgress);
+			mState = DEAD;
+		}
+	}
 }

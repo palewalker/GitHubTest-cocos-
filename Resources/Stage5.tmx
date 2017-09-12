@@ -4,7 +4,7 @@
  <tileset firstgid="9" source="untitled2.tsx"/>
  <layer name="TileLayer" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0jEKwEAIBVFb73/hJZAqbCUE/MM8sHfQKkmS/tHvpKN0pEu8AeV3KB1fxKYH4V5dmR1p+xIl/s0NpYPOO2mih7ONHbvYscsBtQYDPQ==
+   eJzt0sEJADAIxVCv7r9wKfTUo1CxIQ8cIHwjJEl6I8/9jtKhfpTfoXTciE0bYa8MRof6Uf6G0kHnTqrI4k1jxyx2zLIA1acDKw==
   </data>
  </layer>
  <objectgroup name="Map_Replace">

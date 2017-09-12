@@ -11,17 +11,18 @@
 
 using namespace cocos2d;
 using namespace std;
-
+class CPlayer;
 
 
 class CPacMan 
 {
 protected:
 	Vec2 mVec;
+	Vec2 OriginVec;
 
 	Sprite *mpSprite = NULL;
 	Node *tpNode = NULL;
-
+	
 	AnimationBox *PacMan_UP = NULL;
 	AnimationBox *PacMan_DOWN = NULL;
 	AnimationBox *PacMan_LEFT = NULL;
@@ -59,6 +60,7 @@ public:
 	void Destroy();
 	void RunAni();
 	void StopAni();
+	void SetOrigin(Vec2 tVec);
 
 	//A*
 	void BeginMove();
@@ -69,11 +71,13 @@ public:
 	int GetCol();
 	int GetRow();
 
+	void CollisionWithPlayer(CPlayer *tpPlayer);
+	void ResetPos();
+
 	
 	
 	
 	
-	/*void MoveByKeyboard(CMap *tpMap);*/
 
 	
 	

@@ -23,7 +23,7 @@ protected:
 	Node *mpNode = NULL;
 
 	
-
+	int mType = 0;
 
 	string mAniName = "";
 
@@ -33,6 +33,7 @@ protected:
 	//코코스객체
 	Sprite *tSpriteC = NULL;
 	RepeatForever *tRepeatForeverC = NULL;
+	Animate* tAnimate = NULL;
 
 
 
@@ -43,7 +44,7 @@ public:
 	AnimationBox();
 	~AnimationBox();
 
-	void Create(string tAniName, int tTotalFrameCount, float tDelayTime);
+	void Create(int type, string tAniName, int tTotalFrameCount, float tDelayTime);
 	void Destroy();
 
 	void Build();       //HelloWorld에 addChild한다.
@@ -59,9 +60,11 @@ public:
 
 	void RunAni();
 	void StopAni();
+	void RunAction(Action* tpAction);
 
 	void Show();
 	void Hide();
 
 	bool IsShow();
+	Sprite* GetSprite();
 };

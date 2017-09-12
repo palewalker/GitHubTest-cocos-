@@ -2,6 +2,7 @@
 #include "CPlayer.h"
 #include "CUnit.h"
 #include "CPlayerBullet.h"
+#include "SoundBox.h"
 
 
 
@@ -30,9 +31,7 @@ void CPlayer::Create(CMap *tpMap)
 		tPlayerBullet[i]->Create(this);
 	}
 	
-	mpTestLabel = Label::createWithTTF("Test", "fonts/Marker Felt.ttf", 20);
-	mpTestLabel->setPosition(Vec2(380, 50));
-	mpNode->addChild(mpTestLabel);//pale
+
 
 }
 
@@ -373,6 +372,7 @@ void CPlayer::JumpStart()
 {
 	if (mState == ALIVE)
 	{
+		SoundBox::GetInstance()->PlayEffect(2);
 		float tPower = 7.0f;
 
 		if (1 >= mJumpCount)
@@ -550,7 +550,6 @@ void CPlayer::StateCheck()
 	}
 	else if (mState == DEAD)
 	{
-		
 		mpSprite->setVisible(false);
 	}
 }
@@ -576,16 +575,7 @@ void CPlayer::SavePos()
 
 	UserDefault::getInstance()->flush();
 
-	float tX = UserDefault::getInstance()->getFloatForKey("key_x");
-	float tY = UserDefault::getInstance()->getFloatForKey("key_y");
-	int State = UserDefault::getInstance()->getIntegerForKey("key_jumpstate");
-	float Power = UserDefault::getInstance()->getFloatForKey("key_jumppower");
-
-	char tStr[512];
-	memset(tStr, 0, 512);
-	sprintf(tStr, "x: %f, y:%f, state: %i, power:%f", tX, tY, State, Power);
-	mpTestLabel->setString(tStr);//pale
-
+	
 	IsSave = true;
 	
 }
@@ -594,11 +584,7 @@ void CPlayer::SavePos()
 
 void CPlayer::LoadPos()
 {
-	if (mState == DEAD)
-	{
-
-		mState = ALIVE;
-	}
+	
 	
 
 	mVec.x = UserDefault::getInstance()->getFloatForKey("key_x");
@@ -608,6 +594,12 @@ void CPlayer::LoadPos()
 
 	//ryu
 	mpSprite->setPosition(mVec);
+
+	if (mState == DEAD)
+	{
+
+		mState = ALIVE;
+	}
 
 }
 
@@ -621,6 +613,7 @@ void CPlayer::FireStart(float Dir)
 {
 	if (mState == ALIVE)
 	{
+		SoundBox::GetInstance()->PlayEffect(0);
 		
 		if (mDirState ==RIGHT)
 		{
@@ -659,3 +652,15 @@ void CPlayer::SaveInit()
 	UserDefault::getInstance()->flush();
 }
 
+void CPlayer::DoDead()//BossBulletÃæµ¹¿ë
+{
+	mState = DEAD;
+}
+
+void CPlayer::ColiisionWithBoss(CBoss *tpBoss, CProgress *tpProgress)
+{
+	for (int i = 0; i < 30; i++)
+	{
+		tPlayerBullet[i]->CollisionWithBoss(tpBoss, tpProgress);
+	}
+}

@@ -4,6 +4,8 @@
 #include "CBgLight.h"
 #include "LightEffect.h"
 #include "EffectSprite.h"
+#include "Stage5.h"
+#include "SoundBox.h"
 
 using namespace cocos2d;
 using namespace std;
@@ -92,6 +94,7 @@ void Stage4::update(float dt)
 	UpdateRender();
 
 	
+	
 }
 
 void Stage4::onEnter()
@@ -143,7 +146,8 @@ void Stage4::StageInit()
 	ShaderInit(); 
 
 
-
+	SoundBox::GetInstance()->Create();
+	SoundBox::GetInstance()->PlayBGM(4, true);
 	//게임 구성에 필요한 객체 생성
 
 
@@ -191,7 +195,7 @@ void Stage4::onTouchesBegan(const vector<Touch*>&touches, Event *unused_event)
 				{
 					mpPlayer->LoadPos();
 
-					mpGameOver->Hide();
+					mpGameOver->Hide(4);
 				}
 			}
 
@@ -232,12 +236,13 @@ void Stage4::onTouchesCancelled(const vector<Touch*>&touches, Event *unused_even
 
 void Stage4::ReplaceNextStage()
 {
-//	if (true == mMap->NextStage(mpPlayer->GetPosition()))
-//	{
-//		//bug_stageskip
-//		auto tpScene = Stage2::createScene();
-//		Director::getInstance()->pushScene(tpScene);
-//	}
+	if (true == mMap->NextStage(mpPlayer->GetPosition()))
+	{
+		SoundBox::GetInstance()->Destroy();
+		//bug_stageskip
+		auto tpScene = Stage5::createScene();
+		Director::getInstance()->pushScene(tpScene);
+	}
 }
 
 void Stage4::ShaderInit()

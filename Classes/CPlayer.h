@@ -14,6 +14,8 @@
 using namespace cocos2d;
 using namespace std;
 
+class CBoss;
+class CProgress;
 
 typedef vector<int> CIntVec;
 
@@ -97,6 +99,8 @@ public:
 	void FireStart(float Dir);
 	Sprite* GetSprite();
 	void SaveInit();
+	void DoDead();
+	void ColiisionWithBoss(CBoss *tpBoss, CProgress *tpProgress);
 
 
 	

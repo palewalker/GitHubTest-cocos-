@@ -42,13 +42,13 @@ void CInterFace::SetInterFace()
 
 	winSize = Director::getInstance()->getWinSize();
 
-	mStageNumLbl = Label::createWithTTF("Stage :", "fonts/Marker Felt.ttf", 24);
+	mStageNumLbl = Label::createWithTTF("Stage :", "fonts/NanumPen.ttf", 35);
 	mStageNumLbl->setColor(Color3B(255, 255, 255));
 	mStageNumLbl->setPosition(Vec2(winSize.width/2, winSize.height/10 * 9.5));
 	InterFaceLayer->addChild(mStageNumLbl);																											
 
-	mDeadCountLbl = Label::createWithTTF("DeadCount :", "fonts/Marker Felt.ttf", 24);
-	mDeadCountLbl->setColor(Color3B(255, 255, 255));
+	mDeadCountLbl = Label::createWithTTF("DeadCount :", "fonts/NanumPen.ttf", 35);
+	mDeadCountLbl->setColor(Color3B(255, 0, 0));
 	mDeadCountLbl->setPosition(Vec2(winSize.width / 10 * 9 , winSize.height / 10 * 9.5));
 	InterFaceLayer->addChild(mDeadCountLbl);
 
@@ -77,6 +77,10 @@ void CInterFace::Update(float dt)
 	sprintf(tStr, "DeadCount: %i", mDeadCount);
 	mDeadCountLbl->setString(tStr);
 
+	memset(tStr, 0, 512);
+	sprintf(tStr, "%i Stage", mStageNum);
+	mStageNumLbl->setString(tStr);
+
 }
 
 Sprite* CInterFace::GetJumpBtn()
@@ -92,5 +96,10 @@ Sprite* CInterFace::GetFireBtn()
 void CInterFace::DeadCountUP()
 {
 	mDeadCount++;
+}
+
+void CInterFace::SetStageNum(int Stage)
+{
+	mStageNum = Stage;
 }
 

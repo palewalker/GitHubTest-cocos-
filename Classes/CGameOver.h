@@ -16,20 +16,21 @@ private:
 	int mCount = 0;
 	int mState = DEAD;
 	
+	
 
 public:
 	CGameOver();
 	~CGameOver();
 
 	void Create(Node* tpNode);
-	void SetVisible(bool isVisible);
+
 	Sprite* GetSprite();
 	
 	int GetState();
 
 
 	void Show();
-	void Hide();
+	void Hide(int StageNum);
 	bool IsShow();
 
 };

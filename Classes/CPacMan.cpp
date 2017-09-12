@@ -2,6 +2,7 @@
 #include "CPacMan.h"
 #include <math.h>
 #include<cmath>
+#include "CPlayer.h"
 
 #define EPSILON 0.000001//Á¤È®µµ
 
@@ -29,10 +30,10 @@ void CPacMan::Create()
 	PacMan_LEFT = new AnimationBox();
 	PacMan_RIGHT = new AnimationBox();
 
-	PacMan_UP->Create("PacMan_UP", 3, 0.2f);
-	PacMan_DOWN->Create("PacMan_DOWN", 3, 0.2f);
-	PacMan_LEFT->Create("PacMan_LEFT", 3, 0.2f);
-	PacMan_RIGHT->Create("PacMan_RIGHT", 3, 0.2f);
+	PacMan_UP->Create(1,"PacMan_UP", 3, 0.2f);
+	PacMan_DOWN->Create(1,"PacMan_DOWN", 3, 0.2f);
+	PacMan_LEFT->Create(1,"PacMan_LEFT", 3, 0.2f);
+	PacMan_RIGHT->Create(1,"PacMan_RIGHT", 3, 0.2f);
 
 	
 }
@@ -96,6 +97,7 @@ void CPacMan::Show()
 void CPacMan::SetPosition(Vec2 tVec)
 {
 	mVec = tVec;
+	
 
 
 	PacMan_UP->SetPosition(tVec);
@@ -247,5 +249,36 @@ void CPacMan::StopMove()
 	mIsMove = false;
 	mCurTargetIndex = 0;
 	m_RoadVec.clear();
+}
+
+void CPacMan::CollisionWithPlayer(CPlayer *tpPlayer)
+{
+	Vec2 PlayerVec = tpPlayer->GetPosition();
+	Vec2 PacManVec = PacMan_UP->GetPosition();
+
+	float tRadiusPacMan = PacMan_UP->GetSprite()->getContentSize().width*0.5f;
+
+	Rect tPlayerRect = tpPlayer->GetSprite()->getBoundingBox();
+
+	if (true == tPlayerRect.intersectsCircle(PacManVec, tRadiusPacMan))
+	{
+		tpPlayer->DoDead();
+		mState = DEAD;
+	}
+
+}
+
+void CPacMan::ResetPos()
+{
+	
+	PacMan_UP->SetPosition(OriginVec);
+	PacMan_DOWN->SetPosition(OriginVec);
+	PacMan_LEFT->SetPosition(OriginVec);
+	PacMan_RIGHT->SetPosition(OriginVec);
+}
+
+void CPacMan::SetOrigin(Vec2 tVec)
+{
+	OriginVec = tVec;
 }
 
