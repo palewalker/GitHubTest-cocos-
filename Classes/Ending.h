@@ -9,7 +9,7 @@ class Ending : public cocos2d::Scene
 {
 
 protected:
-	Label* Credit = NULL;
+	MenuItemLabel* Credit = NULL;
 	Sprite* BG = NULL;
 	Sprite* Hero = NULL;
 	Sprite* Com = NULL;
@@ -19,6 +19,7 @@ public:
 	
 	
 	void CreditDown();
+	void StartScene();
 
 
 public:

@@ -31,17 +31,17 @@ bool HelloWorld::init()
 	// add a "close" icon to exit the progress. it's an autorelease object
 
 	
+	auto StartLbl = Label::createWithTTF("GAME START", "fonts/retro.ttf", 30);
+	auto EndLbl = Label::createWithTTF("END?", "fonts/retro.ttf", 30);
 
 
-	MenuItemFont* closeItem = MenuItemFont::create
-	("END?", CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
-	closeItem->setPosition(Vec2(600, 70));
+	auto closeItem = MenuItemLabel::create(EndLbl,CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+	closeItem->setPosition(Vec2(200, 70));
 
 
 	
-	auto NextScene = MenuItemFont::create
-	("GameStart!", CC_CALLBACK_1(HelloWorld::doReplaceScene, this));
-	NextScene->setPosition(Vec2(600, 130));
+	auto NextScene = MenuItemLabel::create(StartLbl,CC_CALLBACK_1(HelloWorld::doReplaceScene,this));
+	NextScene->setPosition(Vec2(200, 130));
 	
 
 	// create menu, it's an autorelease object

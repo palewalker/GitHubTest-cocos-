@@ -2,6 +2,8 @@
 #include "SimpleAudioEngine.h"
 
 #include "SoundBox.h"
+#include "HelloWorldScene.h"
+
 
 
 
@@ -38,20 +40,27 @@ bool Ending::init()
 	BG->setPosition(Vec2(400, 240));
 	this->addChild(BG);
 
-	Credit = Label::createWithTTF("Thanks for Playing!", "fonts/TEMPLOGO.ttf", 40);
+	Label *CreditLbl = Label::createWithTTF("Thanks for Playing!", "fonts/retro.ttf", 40);
+
+
+	Credit = MenuItemLabel::create(CreditLbl, CC_CALLBACK_0(Ending::StartScene, this));
 	Credit->setPosition(Vec2(400, 550));
-	Credit->setColor(Color3B(20, 20, 20));
-	this->addChild(Credit);
+	Credit->setColor(Color3B(255, 255, 255));
+	
+
+	auto menu = Menu::create(Credit, NULL);
+	menu->setPosition(Vec2::ZERO);
+	this->addChild(menu, 1);
 
 	Hero = Sprite::create("Guy.png");
-	Hero->setPosition(Vec2(100, 100));
+	Hero->setPosition(Vec2(100, 170));
 	this->addChild(Hero);
 
 	Com = Sprite::create("computer2.png");
-	Com->setPosition(Vec2(730, 83));
+	Com->setPosition(Vec2(730, 160));
 	this->addChild(Com);
 
-	auto tMove = MoveTo::create(10.0f, Vec2(670, 100));
+	auto tMove = MoveTo::create(10.0f, Vec2(670, 170));
 	auto tJump = JumpBy::create(3.0f, Vec2(0, 0), 30, 5);
 	auto tSeq = Sequence::create(tMove, tJump, 
 		CallFunc::create(CC_CALLBACK_0(Ending::CreditDown, this)),NULL);
@@ -70,4 +79,11 @@ void Ending::CreditDown()
 	auto tMove = MoveTo::create(3.0f, Vec2(400, 240));
 
 	Credit->runAction(tMove);
+}
+
+void Ending::StartScene()
+{
+	SoundBox::GetInstance()->Destroy();
+	auto pScene = HelloWorld::create();
+	Director::getInstance()->replaceScene(pScene);
 }

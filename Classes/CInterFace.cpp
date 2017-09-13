@@ -42,14 +42,14 @@ void CInterFace::SetInterFace()
 
 	winSize = Director::getInstance()->getWinSize();
 
-	mStageNumLbl = Label::createWithTTF("Stage :", "fonts/NanumPen.ttf", 35);
+	mStageNumLbl = Label::createWithTTF("Stage :", "fonts/retro.ttf", 25);
 	mStageNumLbl->setColor(Color3B(255, 255, 255));
 	mStageNumLbl->setPosition(Vec2(winSize.width/2, winSize.height/10 * 9.5));
 	InterFaceLayer->addChild(mStageNumLbl);																											
 
-	mDeadCountLbl = Label::createWithTTF("DeadCount :", "fonts/NanumPen.ttf", 35);
+	mDeadCountLbl = Label::createWithTTF("DeadCount :", "fonts/retro.ttf", 20);
 	mDeadCountLbl->setColor(Color3B(255, 0, 0));
-	mDeadCountLbl->setPosition(Vec2(winSize.width / 10 * 9 , winSize.height / 10 * 9.5));
+	mDeadCountLbl->setPosition(Vec2(winSize.width / 10 * 8.5 , winSize.height / 10 * 9.5));
 	InterFaceLayer->addChild(mDeadCountLbl);
 
 	
